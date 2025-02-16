@@ -36,6 +36,7 @@ pipeline{
             }
         }
         stage("Docker build and push"){
+            steps{
             docker.withRegistry('',DOCKER_PASS){
                 docker_image=docker.build "${IMAGE_NAME}"
             }
@@ -43,6 +44,8 @@ pipeline{
                 docker_image.push("${IMAGE_TAG}")
                 docker_image.push('latest')
             }
+        }
+            
         }
         
     }
